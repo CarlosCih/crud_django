@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+
+{% block title %}
+<title>Task List</title>
+{% endblock %}
+
+{% block content %}
+<h1>Task List</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Agregar Tarea</button>
+    <!--         <label for="task_name">Nombre de la tarea</label>
+        <input type="text" id="task_name" name="task_name" required>
+        <label for="description">Descripción</label>
+        <textarea name="description" id="description" required></textarea>
+        <button type="submit">Agregar Tarea</button> -->
+</form>
+
+<div class="task_section">
+    <h2>Incomplete Task</h2>
+    <ul>
+        {% for task in incomplete_tasks %}
+        <li>
+            <strong>{{ task.title }}</strong> - {{ task.description }}
+        </li>
+        {% empty %}
+        <br>
+        <li>No tasks available.</li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="task_section">
+    <h2>Complate Task</h2>
+    <ul>
+        {% for task in complete_tasks %}
+        <li>
+            <strong>{{ task.title }}</strong> - {{ task.description }}
+        </li>
+        {% empty %}
+        <br>
+        <li>No tasks available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
